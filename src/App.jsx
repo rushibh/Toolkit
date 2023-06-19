@@ -11,7 +11,7 @@ function App() {
   const location = useLocation()
   return (
     <>
-      {location.pathname == '/showdata' ?  <button><Link to='/addmedicine'>Add Medicine!</Link></button> :''}
+      {location.pathname == '/showdata' ?  <button><Link to='/addmedicine'>chandu chai vala!</Link></button> :''}
      
       <Routes>
           <Route path='/addmedicine' element={ <PrivateRouting ><AddMedicine /> </PrivateRouting>} />
