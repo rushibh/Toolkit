@@ -1,0 +1,63 @@
+Redux Toolkit
+1> yarn add @reduxjs/toolkit - to download toolkit 
+2> yarn add react-redux 
+3> 
+
+store file must be inside folder of app  
+create store in source Folder which is store.js  . make sure store.js file level must be same package.json file level
+4> In store.jsx file => import {configureStore} from '@reduxjs/toolkit'; - configureStore is a function provided by Redux Toolkit that simplifies the process of creating a Redux store in a React application 
+// before redux-toolkit we were use it createStore like that import { createStore } from 'redux';
+5> export const store = configureStore({
+    reducer : {
+    }
+})
+
+After creating store File we will go for 
+6> index.js file =>  import { store } from './store.jsx'
+and then in addition we will add  import { Provider } from 'react-redux' which will provide this global state to our app taht come form  'react-redux'
+and wrap <Provider store={store} > 
+                <App />
+        </Provider>
+now our store global state will be available  to the app
+7> we need to create a features directory inside of our source directory
+
+features > counter > counterSlice.jsx => 
+import { createSlice } from '@reduxjs/toolkit'
+now we will create initialState like  /******* reducer.jsx in redux ***** like related ******/
+
+const initialState = {
+    count : 0
+}
+export const counterSlice = createSlice({
+    name : "counter",
+    initialState,
+    reducers : {
+        // inside reducer we will able to write some actions like increment and others
+
+        increment : (state) => {
+            state.count += 1 // state.count = count + 1
+        },
+        decrement : (state) => {
+            state.count = state.count - 1
+        }
+    }
+})
+
+
+now we'll destructor those actions so we  have increment   and decrement and  those are destructored from our counterSlice.actions;
+
+
+export const { increment , decrement  } = counterSlice.actions;
+
+export default  counterSlice.reducer;
+
+
+okay 
+8>
+we will create new file is counter in counter directory => 
+like useDispatch() and useSelectore() import from 'react-redux'
+and with addition we import { increment , decrement} from './../features/counter/counterSlice'
+then use it inside button as a anonymus call back function in add call () => dispatch(increment()) same as decrement
+
+
+important thing when we use useSelectore((state) => state._counters_.count) => this _counters_ from store  remember taht not name from counterSlice
